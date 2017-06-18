@@ -1,0 +1,106 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body{
+  background-color: rgb(240, 248, 251);
+  font-size: 62.5%;
+}
+
+
+.backFrameColor{
+  background-color: rgb(255, 255, 255);
+  min-width: 25%;
+  min-height: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.displayDiv{
+  background-color: rgb(232, 232, 232);
+  position: relative;
+  min-width: 100%;
+  min-height: 20%;
+  font-size: 5rem;
+  margin-top: 3%;
+  color: rgb(110, 110, 110);
+  border: 1px solid rgb(203, 203, 203);
+  text-align: right;
+}
+
+.displayOperations{
+  background-color: rgb(227, 229, 230);
+  position: relative;
+  min-width: 100%;
+  font-size: 2rem;
+  color: rgb(161, 182, 186);
+  border-bottom: 1px solid rgb(203, 203, 203);
+  border-left: 1px solid rgb(203, 203, 203);
+  border-right: 1px solid rgb(203, 203, 203);
+  text-align: right;
+}
+
+.roundBtnContainer{
+  position: relative;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 5%;
+}
+.roundBtn{
+  background-color: rgb(175, 17, 77);
+  font-size: 2rem;
+  padding: 5px;
+  width: 40px;
+  border-radius: 50%;
+  float: left;
+  margin: 1%;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+.roundBtn:hover{
+  background-color: rgb(129, 13, 57);
+  cursor: pointer;
+}
+.roundBtn:active{
+  background-color: rgb(235, 101, 152);
+  cursor: pointer;
+}
+
+.clear{
+  clear: both;
+}
+
+.btnContainer{
+  position: relative;
+  padding: 2%;
+  margin: 2%;
+  height: auto;
+  bottom: 10px;
+}
+
+.btnStyle{
+  width: 23%;
+  height: auto;
+  font-size: 3rem;
+  float: left;
+  text-align: center;
+  background: rgb(228, 228, 228);
+  margin: 1%;
+  border-radius: 5px;
+}
+.btnStyle:hover{
+  background: rgb(204, 204, 204);
+  cursor: pointer;
+}
+.btnStyle:active{
+  background: rgb(223, 134, 0);
+}
+
+.equalBtn{
+  width: 48%;
+}
