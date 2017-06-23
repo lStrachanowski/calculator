@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 
     // Is adding key pressed values to inputTable
-    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac") {
+    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow") {
       displayVal += keyValue;
       inputTable.push(keyValue);
     }
@@ -24,8 +24,16 @@ $(document).ready(function() {
 
     if(keyValue == "ac"){
       inputTable = inputTable.splice(0,inputTable.length-1);
-      console.log(inputTable);
       displayVal = inputTable.join("");
+    }
+
+    if(keyValue =="pow"){
+      var a = inputTable.join("");
+      var powerResult = Math.pow(eval(a),2);
+      inputTable = [];
+      inputTable.push(powerResult);
+      displayResult = powerResult;
+      displayVal = powerResult;
     }
 
     // When keyValue equals to "=" inputTable is converted to equation .
