@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 
     // Is adding key pressed values to inputTable
-    if (keyValue !== "=" && keyValue != "ce") {
+    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac") {
       displayVal += keyValue;
       inputTable.push(keyValue);
     }
@@ -22,12 +22,17 @@ $(document).ready(function() {
       inputTable.length = 0;
     }
 
+    if(keyValue == "ac"){
+      inputTable = inputTable.splice(0,inputTable.length-1);
+      console.log(inputTable);
+      displayVal = inputTable.join("");
+    }
+
     // When keyValue equals to "=" inputTable is converted to equation .
     // Equation is solved and value of is returned by eqResult
     if (keyValue == "=") {
-        displayResult = eval(inputTable.join(""));
-      }
-
+      displayResult = eval(inputTable.join(""));
+    }
 
     //Displays value in displayDiv
     $("div.displayDiv").html(displayResult);
