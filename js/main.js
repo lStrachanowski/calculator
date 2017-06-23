@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var displayVal = ""; // is storing equation
-  var displayResult = 0;  // is storing result of equation
+  var displayResult = 0; // is storing result of equation
   var inputTable = [];
   $(document.body).click(function(eve) {
     var clicked = eve.target;
@@ -9,13 +9,14 @@ $(document).ready(function() {
 
     var keyValue = checkIfNumber(currId);
 
+
     // Is adding key pressed values to inputTable
-    if (keyValue !== "=") {
+    if (keyValue !== "=" && keyValue != "ce") {
       displayVal += keyValue;
       inputTable.push(keyValue);
     }
 
-    if(keyValue == "ce"){
+    if (keyValue == "ce") {
       displayVal = "";
       displayResult = "0";
       inputTable.length = 0;
@@ -24,32 +25,9 @@ $(document).ready(function() {
     // When keyValue equals to "=" inputTable is converted to equation .
     // Equation is solved and value of is returned by eqResult
     if (keyValue == "=") {
-      var te = inputTable.slice();
-      var i = 0;
-      var tempNumber = [];
-      var equation = [];
-      while (i < te.length) {
-        //This add numbers to tempNumber array
-        if (!isNaN(te[i]) || te[i] === ".") {
-          tempNumber.push(te[i]);
-          if (i == te.length - 1) {
-            var number = Number(tempNumber.join(""));
-            equation.push(number);
-          }
-        } else {
-          // If pressed key is not number or "." than tempNumber array is joned to one final number and pushed to equation array.
-          // tempNumber is reset to empty array.
-          var temp = Number(tempNumber.join(""));
-          tempNumber.length = 0;
-          equation.push(temp);
-          equation.push(te[i]);
-        }
-        i++;
+        displayResult = eval(inputTable.join(""));
       }
-      displayResult = eval(equation.join(''));
-      equation.length = 0;
-      te.length = 0;
-    }
+
 
     //Displays value in displayDiv
     $("div.displayDiv").html(displayResult);
@@ -87,6 +65,10 @@ function checkIfNumber(val) {
       return "ac";
     } else if (val == "ce") {
       return "ce";
+    } else if (val == "left") {
+      return "(";
+    } else if (val == "right") {
+      return ")";
     }
   }
 }

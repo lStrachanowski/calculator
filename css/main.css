@@ -13,7 +13,7 @@ body{
 .backFrameColor{
   background-color: rgb(255, 255, 255);
   min-width: 25%;
-  min-height: 50%;
+  /*min-height: 50%;*/
   position: absolute;
   left: 50%;
   top: 50%;
@@ -102,5 +102,5 @@ body{
 }
 
 .equalBtn{
-  width: 48%;
+  width: 98%;
 }
