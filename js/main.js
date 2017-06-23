@@ -11,22 +11,22 @@ $(document).ready(function() {
 
 
     // Is adding key pressed values to inputTable
-    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow") {
+    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow" && keyValue !="sqrt") {
       displayVal += keyValue;
       inputTable.push(keyValue);
     }
-
+    // delete all operations
     if (keyValue == "ce") {
       displayVal = "";
       displayResult = "0";
       inputTable.length = 0;
     }
-
+    // delete last operation
     if(keyValue == "ac"){
       inputTable = inputTable.splice(0,inputTable.length-1);
       displayVal = inputTable.join("");
     }
-
+    //Calculate power of number
     if(keyValue =="pow"){
       var a = inputTable.join("");
       var powerResult = Math.pow(eval(a),2);
@@ -34,6 +34,15 @@ $(document).ready(function() {
       inputTable.push(powerResult);
       displayResult = powerResult;
       displayVal = powerResult;
+    }
+    // Calculate square root of number
+    if(keyValue == "sqrt"){
+      var a = inputTable.join("");
+      var sqrtResult = Math.sqrt(a);
+      inputTable = [];
+      inputTable.push(sqrtResult);
+      displayResult = sqrtResult;
+      displayVal = sqrtResult;
     }
 
     // When keyValue equals to "=" inputTable is converted to equation .
