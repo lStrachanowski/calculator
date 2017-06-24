@@ -9,7 +9,6 @@ $(document).ready(function() {
 
     var keyValue = checkIfNumber(currId);
 
-
     // Is adding key pressed values to inputTable
     if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow" && keyValue !="sqrt") {
       displayVal += keyValue;
@@ -38,7 +37,7 @@ $(document).ready(function() {
     // Calculate square root of number
     if(keyValue == "sqrt"){
       var a = inputTable.join("");
-      var sqrtResult = Math.sqrt(a);
+      var sqrtResult = Math.sqrt(eval(a));
       inputTable = [];
       inputTable.push(sqrtResult);
       displayResult = sqrtResult;
@@ -48,7 +47,12 @@ $(document).ready(function() {
     // When keyValue equals to "=" inputTable is converted to equation .
     // Equation is solved and value of is returned by eqResult
     if (keyValue == "=") {
-      displayResult = eval(inputTable.join(""));
+      try{
+        displayResult = eval(inputTable.join(""));
+      }catch(err){
+        displayResult = "Invalid operation";
+      }
+
     }
 
     //Displays value in displayDiv
