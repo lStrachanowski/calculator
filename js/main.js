@@ -1,18 +1,23 @@
 $(document).ready(function() {
-
   var displayVal = ""; // is storing equation
   var displayResult = 0; // is storing result of equation
-  var inputTable = [];
+  inputTable = [];
+  tempNum = [];
   $(document.body).click(function(eve) {
     var clicked = eve.target;
     var currId = clicked.id; // Is getting button ID when button is pressed and storing in currId value.
 
     var keyValue = checkIfNumber(currId);
-
     // Is adding key pressed values to inputTable
-    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow" && keyValue !="sqrt") {
-      displayVal += keyValue;
-      inputTable.push(keyValue);
+    if (keyValue !== "=" && keyValue != "ce" && keyValue != "ac" && keyValue !="pow" && keyValue !="sqrt" && keyValue != "per") {
+      if(!isNaN(keyValue) || keyValue == "."){
+        tempNum.push(keyValue);
+        displayVal += keyValue;
+      }else{
+        checkTempNumber();
+        inputTable.push(keyValue);
+        displayVal += keyValue;
+      }
     }
     // delete all operations
     if (keyValue == "ce") {
@@ -27,6 +32,7 @@ $(document).ready(function() {
     }
     //Calculate power of number
     if(keyValue =="pow"){
+      checkTempNumber();
       var a = inputTable.join("");
       var powerResult = Math.pow(eval(a),2);
       inputTable = [];
@@ -36,6 +42,7 @@ $(document).ready(function() {
     }
     // Calculate square root of number
     if(keyValue == "sqrt"){
+      checkTempNumber();
       var a = inputTable.join("");
       var sqrtResult = Math.sqrt(eval(a));
       inputTable = [];
@@ -44,15 +51,40 @@ $(document).ready(function() {
       displayVal = sqrtResult;
     }
 
-    // When keyValue equals to "=" inputTable is converted to equation .
-    // Equation is solved and value of is returned by eqResult
-    if (keyValue == "=") {
+    // Calculate percent
+    if(keyValue =="per"){
       try{
-        displayResult = eval(inputTable.join(""));
+        checkTempNumber();
+        var inVal = Number(inputTable.slice(inputTable.length-1));
+        var inAmount = eval(inputTable.slice(0,inputTable.length-2).join(""));
+        var lastSymbol = inputTable[inputTable.length-2];
+        var percentResult = eval(inAmount + lastSymbol + percentCount(inVal, inAmount));
+        inputTable.length = 0;
+        inputTable.push(percentResult);
+        displayResult = percentResult;
+        displayVal = percentResult;
+        if(inAmount == undefined){
+          displayResult = "Invalid operation";
+        }
       }catch(err){
         displayResult = "Invalid operation";
       }
 
+    }
+
+    // When keyValue equals to "=" inputTable is converted to equation .
+    // Equation is solved and value of is returned by eqResult
+    // If invalid invalid sing is placed at the end of equation error is thrown.
+    if (keyValue == "=") {
+      try{
+        if(tempNum.length !=0 ){
+          inputTable.push(tempNum.join(""));
+          tempNum.length = 0;
+        }
+        displayResult = eval(inputTable.join(""));
+      }catch(err){
+        displayResult = "Invalid operation";
+      }
     }
 
     //Displays value in displayDiv
@@ -64,6 +96,18 @@ $(document).ready(function() {
 
 });
 
+//Is chcecking if tempNum was pushed to inputTable
+function checkTempNumber(){
+  if(tempNum.length !=0 ){
+    inputTable.push(tempNum.join(""));
+    tempNum.length = 0;
+  }
+}
+// Function calculating percent
+function percentCount(num, amount){
+  return num*amount/100;
+}
+
 // Function is checking if clicked value is number or mathematical sign.
 function checkIfNumber(val) {
   if (!isNaN(val)) {
@@ -72,7 +116,7 @@ function checkIfNumber(val) {
     if (val == "devide") {
       return "/";
     } else if (val == "percent") {
-      return "%";
+      return "per";
     } else if (val == "power") {
       return "pow";
     } else if (val == "square") {
