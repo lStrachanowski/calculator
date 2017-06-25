@@ -104,3 +104,9 @@ body{
 .equalBtn{
   width: 98%;
 }
+
+@media (max-width: 750px) {
+  .backFrameColor{
+    width: 80%;
+  }
+}
